@@ -10,6 +10,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     line-height: 1.6;
     background-color: #f7f7f7;
+    /* background-image: url('logo.png'); */
     color: #333;
     padding: 20px;
 }
@@ -51,6 +52,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+
 }
 
 /* 表格样式 */
@@ -176,6 +178,7 @@ h2 {
 #conversionForm button:hover {
     background-color: #0056b3;
 }
+
 
 /* 换算结果样式 */
 #conversionResult {

@@ -1,5 +1,5 @@
 // 接口地址
-const brandsApiUrl = 'https://api.jinjia.com.cn/index.php?m=app&a=brand&mi=0&cache=1';
+// const brandsApiUrl = 'https://api.jinjia.com.cn/index.php?m=app&a=brand&mi=0&cache=1';
 const domesticGoldApiUrl = 'https://api.jinjia.com.cn/index.php?m=app&mi=0&cache=1';
 
 // 用于存储数据的变量
@@ -46,8 +46,8 @@ function updateDomesticGoldTable(jsonData) {
 
             row.insertCell().textContent = item['maxprice'] + " 元/克";
             row.insertCell().textContent = item['minprice'] + " 元/克";
-            row.insertCell().textContent = item['openingprice'] + " 元/克";
-            row.insertCell().textContent = item['lastclosingprice'] + " 元/克";
+            // row.insertCell().textContent = item['openingprice'] + " 元/克";
+            // row.insertCell().textContent = item['lastclosingprice'] + " 元/克";
             row.insertCell().textContent = item['date'];
         });
     }
@@ -147,20 +147,20 @@ function openTab(evt, tabName) {
 // 页面加载完成后立即获取数据
 window.onload = function() {
     // 获取金店品牌数据
-    fetch(brandsApiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(jsonData => {
-            brandsData = jsonData;
-            updateBrandsTable(jsonData);
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
+    // fetch(brandsApiUrl)
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error('Network response was not ok');
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(jsonData => {
+    //         brandsData = jsonData;
+    //         updateBrandsTable(jsonData);
+    //     })
+    //     .catch(error => {
+    //         console.error('There has been a problem with your fetch operation:', error);
+    //     });
 
     // 获取国内金价数据
     fetch(domesticGoldApiUrl)
@@ -204,29 +204,29 @@ window.onload = function() {
             console.error('There has been a problem with your fetch operation:', error);
         });
 
-    // 获取国际金价数据
-    fetch(domesticGoldApiUrl)
-        .then(response => response.json())
-        .then(jsonData => {
-            updateInternationalGoldTable(jsonData);
-        })
-        .catch(error => console.error('There has been a problem with your fetch operation:', error));
+    // // 获取国际金价数据
+    // fetch(domesticGoldApiUrl)
+    //     .then(response => response.json())
+    //     .then(jsonData => {
+    //         updateInternationalGoldTable(jsonData);
+    //     })
+    //     .catch(error => console.error('There has been a problem with your fetch operation:', error));
 
-    // 获取香港金价数据
-    fetch(domesticGoldApiUrl)
-        .then(response => response.json())
-        .then(jsonData => {
-            updateHongKongGoldTable(jsonData);
-        })
-        .catch(error => console.error('There has been a problem with your fetch operation:', error));
+    // // 获取香港金价数据
+    // fetch(domesticGoldApiUrl)
+    //     .then(response => response.json())
+    //     .then(jsonData => {
+    //         updateHongKongGoldTable(jsonData);
+    //     })
+    //     .catch(error => console.error('There has been a problem with your fetch operation:', error));
 
-    // 获取银行金价数据
-    fetch(domesticGoldApiUrl)
-        .then(response => response.json())
-        .then(jsonData => {
-            updateBankGoldTable(jsonData);
-        })
-        .catch(error => console.error('There has been a problem with your fetch operation:', error));
+    // // 获取银行金价数据
+    // fetch(domesticGoldApiUrl)
+    //     .then(response => response.json())
+    //     .then(jsonData => {
+    //         updateBankGoldTable(jsonData);
+    //     })
+    //     .catch(error => console.error('There has been a problem with your fetch operation:', error));
 
     // 确保换算工具能够使用当前的金价
     if (domesticGoldData && domesticGoldData['gn']) {
