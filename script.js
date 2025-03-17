@@ -145,23 +145,7 @@ function openTab(evt, tabName) {
 }
 
 // 页面加载完成后立即获取数据
-window.onload = function() {
-    // 获取金店品牌数据
-    // fetch(brandsApiUrl)
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         return response.json();
-    //     })
-    //     .then(jsonData => {
-    //         brandsData = jsonData;
-    //         updateBrandsTable(jsonData);
-    //     })
-    //     .catch(error => {
-    //         console.error('There has been a problem with your fetch operation:', error);
-    //     });
-
+function refreshData() {
     // 获取国内金价数据
     fetch(domesticGoldApiUrl)
         .then(response => {
@@ -203,53 +187,32 @@ window.onload = function() {
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
         });
+}
 
-    // // 获取国际金价数据
-    // fetch(domesticGoldApiUrl)
-    //     .then(response => response.json())
-    //     .then(jsonData => {
-    //         updateInternationalGoldTable(jsonData);
-    //     })
-    //     .catch(error => console.error('There has been a problem with your fetch operation:', error));
-
-    // // 获取香港金价数据
-    // fetch(domesticGoldApiUrl)
-    //     .then(response => response.json())
-    //     .then(jsonData => {
-    //         updateHongKongGoldTable(jsonData);
-    //     })
-    //     .catch(error => console.error('There has been a problem with your fetch operation:', error));
-
-    // // 获取银行金价数据
-    // fetch(domesticGoldApiUrl)
-    //     .then(response => response.json())
-    //     .then(jsonData => {
-    //         updateBankGoldTable(jsonData);
-    //     })
-    //     .catch(error => console.error('There has been a problem with your fetch operation:', error));
+window.onload = function() {
+    // 初始加载
+    refreshData();
+    // 每3秒刷新
+    setInterval(refreshData, 3000);
 
     // 确保换算工具能够使用当前的金价
     if (domesticGoldData && domesticGoldData['gn']) {
         const daygoldItem = domesticGoldData['gn'].find(item => item['dir'] === 'daygold');
         if (daygoldItem) {
-            // 假设这里已经获取到了国内金价数据，并且能够找到daygold项目
             const currentGoldPrice = parseFloat(daygoldItem['price']);
-            // 可以在此处调用convert函数，以初始化换算工具的显示
             convert(); // 根据需要决定是否需要自动执行换算
         }
     }
 
-    // 为金额和重量输入框添加事件监听器
+    // 事件监听器部分保持不变
     const amountInput = document.getElementById('amount');
     const weightInput = document.getElementById('weight');
 
     amountInput.addEventListener('input', function() {
-        // 当输入金额时，清空重量输入框
         weightInput.value = '';
     });
 
     weightInput.addEventListener('input', function() {
-        // 当输入重量时，清空金额输入框
         amountInput.value = '';
     });
 };
